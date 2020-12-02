@@ -1,8 +1,13 @@
-#encoding: utf-8
+# frozen_string_literal: true
+
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
 
 get '/' do
-	erb 'Hello!' 			
+		erb 'Hello!'
+end
+
+get '/new' do
+		erb 'Hello World'
 end
