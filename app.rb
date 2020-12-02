@@ -20,7 +20,8 @@ configure do
 	 (
 		"id"  INTEGER PRIMARY KEY AUTOINCREMENT,
 		"created_date"  DATE,
-		"content" TEXT
+		"content" TEXT,
+		"comments" TEXT
 	  )'
 end
 
@@ -55,4 +56,12 @@ get '/post/:post_id' do
 	@row = results[0]
 
 	erb :post
+end
+
+post '/post/:post_id' do
+	@com = params[:com]
+	post_id = params[:post_id]
+
+	# @db.execute 'insert into posts ()'
+	erb "#{@com} #{@com}"
 end
