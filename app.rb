@@ -35,8 +35,14 @@ end
 post '/new' do
 	@content = params[:content]
 
-	@error = 'Post is empty!' if @content == ''
+	if @content == ''
+		@error = 'Post is empty!' 
+		return erb :new
+	end
 	# return erb :new if @error != ''
+	
+	@db.execute 'insert into posts (content, created_date) values (?, datetime())', [@content]
 
-	erb (@error !='') ? :new : "ok #{@content}"
+	erb "ok #{@content}"
+
 end
