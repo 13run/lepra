@@ -51,7 +51,9 @@ post '/new' do
 	end
 	# return erb :new if @error != ''
 	
-	@db.execute 'insert into posts (content, created_date) values (?, datetime())', [@content]
+	@db.execute 'insert into posts 
+	(content, created_date)
+	 values (?, datetime())', [@content]
 
 	redirect to '/'
 end
@@ -62,8 +64,7 @@ get '/post/:post_id' do
 	results = @db.execute 'select * from posts where id=?', [post_id]
 	@row = results[0]
 
-	comments = @db.execute 'select * from comments where id=?', [post_id]
-	@comment = comments[0]
+	@comments = @db.execute 'select * from comments where post_id=? order by created_date desc --', [post_id]
 
 	erb :post
 end
@@ -72,7 +73,9 @@ post '/post/:post_id' do
 	@com = params[:com]
 	post_id = params[:post_id]
 
-	@db.execute 'insert into comments (created_date, content, post_id) values (datetime(), ?, ?)', [@com, post_id]
+	@db.execute 'insert into comments
+	 (created_date, content, post_id)
+	  values (datetime(), ?, ?)', [@com, post_id]
 	
 	redirect to "/post/#{post_id}"
 end
