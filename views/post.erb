@@ -4,6 +4,13 @@
     <%= @row['content']%>
     <br>
     added: <%= @row['created_date']%>
+    <br>
+</p>
+<hr>
+<p>
+    <br>
+    <%= @comment['content']%>, <%= @comment['created_date']%>
+    <br>
 </p>
 <h4>Comments</h4>
 <form action="/post/<%= @row['id']%>" method="POST">
